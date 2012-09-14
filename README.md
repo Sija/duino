@@ -40,8 +40,7 @@ Board library will attempt to autodiscover the Arduino unless you specify `seria
 
 ````javascript
 var board = new Arduino.Board({
-  debug: true,
-  baudrate: 9600
+  debug: true
 });
 ````
 
@@ -193,7 +192,7 @@ Instruct the servo to immediately go to a position from 0 to 180.
 
 * Switched to Firmata protocol instead of using custom C code
 * Added `I2C` related methods, namely: `sendI2CConfig`, `sendI2CWriteRequest` and `sendI2CReadRequest`
-* Made baudrate and serial port path customizable
+* Made serial port path customizable
 
 # license
 

@@ -7,7 +7,7 @@
   ],
   "name": "duino",
   "description": "Arduino framework for mad scientists",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "keywords": [
     "arduino",
     "serial",
@@ -15,13 +15,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/ecto/duino.git"
+    "url": "git://github.com/Sija/duino.git"
   },
   "main": "index.js",
   "engines": {
     "node": "*"
   },
   "dependencies": {
+    "firmata": "*",
     "serialport": "*",
     "colors": "*"
   },
