@@ -39,7 +39,7 @@ The way this works is simple (in theory, not in practice). The Arduino listens f
 Board library will attempt to autodiscover the Arduino unless you specify `serialPort` option.
 
 ````javascript
-var board = new arduino.Board({
+var board = new Arduino.Board({
   debug: true,
   baudrate: 9600
 });
