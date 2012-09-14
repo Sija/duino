@@ -11,10 +11,10 @@ A framework for working with Arduinos in node.js
 # usage
 
 ````javascript
-var arduino = require('duino'),
-    board = new arduino.Board();
+var Arduino = require('duino'),
+    board = new Arduino.Board();
 
-var led = new arduino.Led({
+var led = new Arduino.Led({
   board: board,
   pin: 13
 });
@@ -27,7 +27,7 @@ led.blink();
 The way this works is simple (in theory, not in practice). The Arduino listens for low-level signals over a serial port, while we abstract all of the logic on the Node side.
 
 1.  Plug in your Arduino
-2.  Upload the C code at `./src/du.ino` to it
+2.  Upload Standard Firmata firmware (found in `Examples -> Firmata`)
 3.  Write a simple **duino** script
 4.  ?????
 5.  Profit!
@@ -36,11 +36,12 @@ The way this works is simple (in theory, not in practice). The Arduino listens f
 
 ##board
 
-Right now, the board library will attempt to autodiscover the Arduino. I'm going to make it configurable, don't worry.
+Board library will attempt to autodiscover the Arduino unless you specify `serialPort` option.
 
 ````javascript
 var board = new arduino.Board({
-  debug: true
+  debug: true,
+  baudrate: 9600
 });
 ````
 
@@ -91,7 +92,7 @@ Write a value between 0-255 to a pin
 ##led
 
 ````javascript
-var led = new arduino.Led({
+var led = new Arduino.Led({
   board: board,
   pin: 13
 });
@@ -122,7 +123,7 @@ Current brightness of the LED
 ##piezo
 
 ````javascript
-var led = new arduino.Piezo({
+var led = new Arduino.Piezo({
   board: board,
   pin: 13
 });
@@ -144,7 +145,7 @@ Write a square wave to the piezo element.
 ##button
 
 ````javascript
-var button = new arduino.Button({
+var button = new Arduino.Button({
   board: board,
   pin: 13
 });
@@ -167,7 +168,7 @@ setInterval(function(){
 ##servo
 
 ````javascript
-var servo = new arduino.Servo({
+var servo = new Arduino.Servo({
   board: board
 });
 
@@ -188,42 +189,11 @@ Instruct the servo to immediately go to a position from 0 to 180.
 
 ##potentiometer
 
-# protocol
+# changes in this fork
 
-Each message sent to the Arduino board by the **board** class has 8 bytes.
-
-A full message looks like this:
-
-    !0113001.
-
-`!` Start
-`01` Command (digitalWrite)
-`13` Pin number
-`001` Value (high)
-`.` Stop
-
-I was drunk. It works.
-
-##command
-
-What is implemented right now:
-
-*  `00` pinMode
-*  `01` digitalWrite
-*  `02` digitalRead
-*  `03` analogWrite
-*  `04` analogRead
-*  `99` debug
-
-##pin
-
-Pins can be sent as an integer or a string(`1`, `2`, `"3"`, `"A0"`)
-
-##value
-
-*  `board.LOW`(`0`)
-*  `board.HIGH`(`255`)
-*  integer/string from `0`-`255` for PWM pins
+* Switched to Firmata protocol instead of using custom C code
+* Added `I2C` related methods, namely: `sendI2CConfig`, `sendI2CWriteRequest` and `sendI2CReadRequest`
+* Made baudrate and serial port path customizable
 
 # license
 
